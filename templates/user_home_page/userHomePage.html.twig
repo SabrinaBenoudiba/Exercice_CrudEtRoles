@@ -12,4 +12,32 @@
     <h1>Hello ! Bienvenue sur notre site !</h1>
 </div>
 
+<div>
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mot de Passe</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <th scope="row">{{data.id}}</th>
+                <td>{{data.nom}}</td>
+                <td>{{data.prenom}}</td>
+                <td>{{data.email}}</td>
+                <td>
+                <a href="{{ path('update',{'id': data.id}) }}" class="btn btn-warning">Modifier</a>
+                <a href="{{ path('delete',{'id': data.id}) }}" class="btn btn-danger">Supprimer</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> 
+</div>
 {% endblock %}
