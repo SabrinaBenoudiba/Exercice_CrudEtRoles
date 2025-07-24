@@ -19,6 +19,8 @@
         <h2>Hello, Bienvenue sur la page d'accueil</h2>
     </div>
 
+
+
     <div>
         <a href="{{path('app_login')}}">Connexion</a>
     </div>
@@ -32,7 +34,12 @@
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}    
             <div>
-                <a href="{{path('app_dashboard_admin')}}">AdminDashboard</a>
+                <a href="{{path('app_adminHomePage')}}">AdminHomePage</a>
+            </div>
+        {% endif %}
+         {% if is_granted("ROLE_USER") %}    
+            <div>
+                <a href="{{path('app_userHomePage')}}">UserHomePage</a>
             </div>
         {% endif %}
 

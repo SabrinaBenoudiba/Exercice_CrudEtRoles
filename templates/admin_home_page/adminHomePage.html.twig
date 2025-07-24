@@ -7,7 +7,6 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
 <div class="row">
     {#Affichage d'un message flash#}
         {% for message in app.flashes('notice')%}
@@ -18,13 +17,14 @@
 </div>
 
 <div class="example-wrapper">
-    <h1>Hello ! Bienvenue sur votre  !</h1>
+    <h1>Hello ! Bienvenue sur notre site !</h1>
 </div>
 
 <div>
     <table class="table table-striped-columns">
         <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Email</th>
@@ -32,17 +32,23 @@
         </thead>
     
         <tbody>
-        {% if datas is defined %}
-                <tr>
-                    <td>{{ (app.user.Nom ) }}</td>
-                    <td>{{ (app.user.Prenom) }}</td>
-                    <td>{{ (app.user.Email) }}</td>
-                    <td>
-                        <a href="{{ path('app_update',{'id': app.user.id}) }}" class="btn btn-warning">Modifier</a>
-                    </td>
-                </tr>
-        {% endif %}
+        {% for data in datas %}
+            <tr>
+                {# <th scope="row">{{data.id}}</th> #}
+                <td>{{data.nom}}</td>
+                <td>{{data.prenom}}</td>
+                <td>{{data.email}}</td>
+                <td>
+                    <a href="{{ path('app_update_admin',{'id': data.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_delete_admin',{'id': data.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table> 
 </div>
+<div>
+    <button> <a href="{{path('app_logout')}}">Deconnexion</a> </button>
+</div>
 {% endblock %}
+
