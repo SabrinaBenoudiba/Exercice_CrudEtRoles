@@ -39,7 +39,7 @@ final class UserHomePageController extends AbstractController
 
             $this->addFlash('notice', 'Modification réussi !!');
 
-            return $this->redirectToRoute('app_userHomePage'); 
+            return $this->redirectToRoute('app_home_page'); 
         }
 
         $datas = $userRepo->findAll();
