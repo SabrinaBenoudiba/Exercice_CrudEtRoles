@@ -13,7 +13,7 @@
         {% endfor %}
     </div>
 
-    <h1>Register</h1>
+    <h1 class="title h1 mb-5 text-secondary">S'inscrire</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -30,7 +30,9 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {# {{ form_row(registrationForm.imageFile, {
+            label: 'ImageFile'
+        }) }} #}
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}

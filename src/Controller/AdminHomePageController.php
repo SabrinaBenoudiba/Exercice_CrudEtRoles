@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\AdminUpdateType;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,15 +27,17 @@ final class AdminHomePageController extends AbstractController
         ]);
     }
 
-    #[Route('/adminHomePage/{id}', name: 'app_update_admin')]
+    #[Route('/adminHomePage/{id}', name: 'app_update_admin')] # création d'un formulaire 
     #[IsGranted("ROLE_ADMIN")]
     public function update_form($id, Request $request, EntityManagerInterface $entityManager,UserRepository $userRepo ): Response 
     {
-        $crud = $entityManager->getRepository(User::class)->find($id);
-        $form = $this->createForm(AdminUpdateType::class, $crud); 
+        $data = $entityManager->getRepository(User::class)->find($id);
+        $form = $this->createForm(RegistrationFormType::class, $data, [//option pour enlever les options donc password et termes
+            'is_registration' => false,
+        ]); 
         $form->handleRequest($request); 
         if ( $form->isSubmitted() && $form->isValid()){ 
-            $entityManager->persist($crud); 
+            $entityManager->persist($data); 
             $entityManager->flush(); 
 
             $this->addFlash('notice', 'Modification réussi !!');

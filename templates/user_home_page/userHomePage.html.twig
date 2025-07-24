@@ -16,33 +16,20 @@
             </div>
         {% endfor %}
 </div>
-
 <div class="example-wrapper">
-    <h1>Hello ! Bienvenue sur votre Profil !</h1>
+    <h1 class="title h1 mb-5 text-secondary">Hello ! Bienvenue sur votre Profil !</h1>
 </div>
 
-<div>
-    <table class="table table-striped-columns">
-        <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-    
-        <tbody>
-        {% if datas is defined %}
-                <tr>
-                    <td>{{ (app.user.Nom ) }}</td>
-                    <td>{{ (app.user.Prenom) }}</td>
-                    <td>{{ (app.user.Email) }}</td>
-                    <td>
-                        <a href="{{ path('app_update',{'id': app.user.id}) }}" class="btn btn-warning">Modifier</a>
-                    </td>
-                </tr>
+ <div class="form-block">
+    <div class="card" style="width: 18rem;">
+        <img src="https://static.wikia.nocookie.net/naruto/images/c/cd/Sakura_partie_2.jpg/revision/latest?cb=20150312215407&path-prefix=fr" class="card-img-top" alt="...">
+    <div class="card-body">
+        {% if datas is defined %}   
+            <P>{{ (app.user.Nom ) }}</P>
+            <P>{{ (app.user.Prenom) }}</P>
+            <P>{{ (app.user.Email) }}</P>
+            <a href="{{ path('app_update',{'id': app.user.id}) }}" class="btn btn-warning">Modifier</a>
         {% endif %}
-        </tbody>
-    </table> 
 </div>
+
 {% endblock %}

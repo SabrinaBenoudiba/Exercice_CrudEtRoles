@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserUpdateType;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +30,11 @@ final class UserHomePageController extends AbstractController
     #[IsGranted("ROLE_USER")] 
     public function update_form($id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepo): Response 
     {
-        $crud = $entityManager->getRepository(User::class)->find($id);
-        $form = $this->createForm(UserUpdateType::class, $crud); 
+        $data = $entityManager->getRepository(User::class)->find($id);
+        $form = $this->createForm(RegistrationFormType::class, $data, ['is_registration' => false]); 
         $form->handleRequest($request); 
         if ( $form->isSubmitted() && $form->isValid()){ 
-            $entityManager->persist($crud); 
+            $entityManager->persist($data); 
             $entityManager->flush(); 
 
             $this->addFlash('notice', 'Modification réussi !!');
